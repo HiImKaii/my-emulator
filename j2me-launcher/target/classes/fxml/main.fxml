@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.j2me.launcher.controller.MainController"
+            stylesheets="@../css/dark-theme.css">
+
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <padding><Insets top="20" left="15" right="15" bottom="20"/></padding>
+            <Label text="J2ME Launcher" styleClass="app-title"/>
+            <Separator/>
+            <Button fx:id="btnLibrary" text="Library" styleClass="nav-button" onAction="#onLibraryClicked" maxWidth="Infinity"/>
+            <Button fx:id="btnRecent" text="Recent" styleClass="nav-button" onAction="#onRecentClicked" maxWidth="Infinity"/>
+            <Button fx:id="btnSettings" text="Settings" styleClass="nav-button" onAction="#onSettingsClicked" maxWidth="Infinity"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Label fx:id="lblStatus" text="Ready" styleClass="status-label"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="15">
+            <padding><Insets top="20" left="20" right="20" bottom="20"/></padding>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearch" promptText="Search games..." styleClass="search-field" HBox.hgrow="ALWAYS" onKeyReleased="#onSearchChanged"/>
+                <Button text="Rescan" styleClass="action-button" onAction="#onRescanClicked"/>
+            </HBox>
+            <Label fx:id="lblContentTitle" text="Game Library" styleClass="content-title"/>
+            <ScrollPane styleClass="game-scroll-pane" VBox.vgrow="ALWAYS">
+                <GridPane fx:id="gameGrid" hgap="15" vgap="15" styleClass="game-grid">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="160" prefWidth="160"/>
+                        <ColumnConstraints minWidth="160" prefWidth="160"/>
+                        <ColumnConstraints minWidth="160" prefWidth="160"/>
+                        <ColumnConstraints minWidth="160" prefWidth="160"/>
+                        <ColumnConstraints minWidth="160" prefWidth="160"/>
+                    </columnConstraints>
+                </GridPane>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <right>
+        <VBox fx:id="sidePanel" spacing="15" visible="false" managed="false" styleClass="side-panel" minWidth="250" maxWidth="300">
+            <padding><Insets top="20" left="15" right="15" bottom="20"/></padding>
+
+            <VBox fx:id="gameDetailsPanel" spacing="15" visible="false" managed="false">
+                <Label fx:id="lblGameTitle" text="Game Title" styleClass="detail-title"/>
+                <Label fx:id="lblGameVendor" text="Vendor" styleClass="detail-label"/>
+                <Label fx:id="lblGameType" text="Type: MIDlet" styleClass="detail-label"/>
+                <Separator/>
+                <Label text="Settings" styleClass="section-title"/>
+                <Label text="Resolution:"/>
+                <HBox spacing="5">
+                    <Spinner fx:id="spnWidth" styleClass="settings-spinner"/>
+                    <Label text="x"/>
+                    <Spinner fx:id="spnHeight" styleClass="settings-spinner"/>
+                </HBox>
+                <Label text="FPS Cap:"/>
+                <Spinner fx:id="spnFps" styleClass="settings-spinner"/>
+                <CheckBox fx:id="chkAudio" text="Enable Audio" styleClass="settings-checkbox"/>
+                <Region VBox.vgrow="ALWAYS"/>
+                <Button fx:id="btnLaunch" text="Launch Game" styleClass="launch-button" maxWidth="Infinity" onAction="#onLaunchClicked"/>
+                <Button text="Close" styleClass="cancel-button" maxWidth="Infinity" onAction="#onCloseSidePanel"/>
+            </VBox>
+
+            <VBox fx:id="settingsPanel" spacing="15" visible="false" managed="false">
+                <Label text="Settings" styleClass="detail-title"/>
+                <Label text="Games Folder:"/>
+                <HBox spacing="5">
+                    <TextField fx:id="txtGamesFolder" styleClass="settings-text-field" HBox.hgrow="ALWAYS"/>
+                    <Button text="..." styleClass="action-button" onAction="#onBrowseGamesFolder"/>
+                </HBox>
+                <Label text="FreeJ2ME Path:"/>
+                <HBox spacing="5">
+                    <TextField fx:id="txtFreej2mePath" styleClass="settings-text-field" HBox.hgrow="ALWAYS"/>
+                    <Button text="..." styleClass="action-button" onAction="#onBrowseFreej2me"/>
+                </HBox>
+                <Label text="WIE Path:"/>
+                <HBox spacing="5">
+                    <TextField fx:id="txtWiePath" styleClass="settings-text-field" HBox.hgrow="ALWAYS"/>
+                    <Button text="..." styleClass="action-button" onAction="#onBrowseWie"/>
+                </HBox>
+                <Separator/>
+                <Button text="Save Settings" styleClass="launch-button" maxWidth="Infinity" onAction="#onSaveSettings"/>
+                <Button text="Close" styleClass="cancel-button" maxWidth="Infinity" onAction="#onCloseSidePanel"/>
+            </VBox>
+        </VBox>
+    </right>
+</BorderPane>

@@ -1,0 +1,4 @@
+#!/bin/bash
+# Mở J2ME Launcher (giao diện đầy đủ)
+cd /home/quan/Desktop/my-emulator/j2me-launcher
+./run.sh

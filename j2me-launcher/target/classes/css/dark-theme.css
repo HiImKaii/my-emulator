@@ -1,0 +1,41 @@
+/* J2ME Launcher - Dark Theme */
+* {
+    -fx-base-color: #1e1e1e;
+    -fx-background-color: #121212;
+    -fx-text-fill: #e0e0e0;
+    -fx-accent: #4a90d9;
+}
+.root { -fx-background-color: #121212; -fx-font-family: "Segoe UI", "Ubuntu", sans-serif; -fx-font-size: 14px; }
+.sidebar { -fx-background-color: #1a1a1a; -fx-border-color: #333333; -fx-border-width: 0 1 0 0; -fx-min-width: 180; -fx-max-width: 200; }
+.app-title { -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #4a90d9; }
+.nav-button { -fx-background-color: transparent; -fx-text-fill: #b0b0b0; -fx-font-size: 14px; -fx-padding: 10 15; -fx-cursor: hand; -fx-alignment: CENTER_LEFT; }
+.nav-button:hover { -fx-background-color: #2a2a2a; -fx-text-fill: #ffffff; }
+.search-field { -fx-background-color: #2a2a2a; -fx-text-fill: #e0e0e0; -fx-prompt-text-fill: #707070; -fx-border-color: #404040; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8 12; }
+.search-field:focused { -fx-border-color: #4a90d9; }
+.action-button { -fx-background-color: #2a2a2a; -fx-text-fill: #e0e0e0; -fx-border-color: #404040; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8 16; -fx-cursor: hand; }
+.action-button:hover { -fx-background-color: #3a3a3a; }
+.launch-button { -fx-background-color: #2d5a2d; -fx-text-fill: #90ee90; -fx-border-color: #3d7a3d; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 10 20; -fx-font-weight: bold; -fx-cursor: hand; }
+.launch-button:hover { -fx-background-color: #3d7a3d; }
+.cancel-button { -fx-background-color: #4a2a2a; -fx-text-fill: #ee9090; -fx-border-color: #7a3a3a; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 8 16; -fx-cursor: hand; }
+.cancel-button:hover { -fx-background-color: #7a3a3a; }
+.game-grid { -fx-padding: 10; }
+.content-title { -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #ffffff; }
+.status-label { -fx-font-size: 12px; -fx-text-fill: #707070; }
+.side-panel { -fx-background-color: #1a1a1a; -fx-border-color: #333333; -fx-border-width: 1 0 0 1; }
+.detail-title { -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ffffff; }
+.detail-label { -fx-font-size: 13px; -fx-text-fill: #b0b0b0; }
+.section-title { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #4a90d9; }
+.settings-text-field { -fx-background-color: #2a2a2a; -fx-text-fill: #e0e0e0; -fx-border-color: #404040; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 6 10; }
+.settings-spinner { -fx-background-color: #2a2a2a; }
+.settings-checkbox { -fx-text-fill: #e0e0e0; }
+.spinner .text-field { -fx-background-color: #2a2a2a; -fx-text-fill: #e0e0e0; -fx-border-color: #404040; }
+.game-scroll-pane { -fx-background-color: transparent; }
+.game-scroll-pane .viewport { -fx-background-color: transparent; }
+.scroll-bar { -fx-background-color: transparent; }
+.scroll-bar:vertical { -fx-background-color: #2a2a2a; }
+.check-box { -fx-text-fill: #e0e0e0; }
+.check-box .box { -fx-background-color: #2a2a2a; -fx-border-color: #404040; }
+.check-box:selected .box { -fx-background-color: #4a90d9; -fx-border-color: #4a90d9; }
+.separator { -fx-background-color: #333333; }
+.dialog-pane { -fx-background-color: #1e1e1e; }
+.progress-indicator { -fx-progress-color: #4a90d9; }

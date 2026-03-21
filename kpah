@@ -1,0 +1,10 @@
+#!/bin/bash
+# Chạy game kpah.jar trực tiếp, không qua launcher
+
+cd /home/quan/Desktop/my-emulator/freej2me/build
+exec java \
+    --add-opens "java.base/java.lang=ALL-UNNAMED" \
+    --add-opens "java.base/java.lang.reflect=ALL-UNNAMED" \
+    --add-opens "java.base/java.util=ALL-UNNAMED" \
+    --add-opens "java.base/java.io=ALL-UNNAMED" \
+    -jar freej2me.jar 'file:///home/quan/Downloads/game/kpah.jar' 240 320 2
