@@ -5,7 +5,7 @@ com/j2me/launcher/model/GameInfo.class
 com/j2me/launcher/Main.class
 com/j2me/launcher/service/GameLauncherService.class
 com/j2me/launcher/service/GameCacheService.class
-com/j2me/launcher/model/AppConfig.class
 com/j2me/launcher/controller/MainController.class
+com/j2me/launcher/model/AppConfig.class
 com/j2me/launcher/model/GameSettings.class
 com/j2me/launcher/controller/MainController$1.class
