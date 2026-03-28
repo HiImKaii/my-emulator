@@ -249,8 +249,8 @@ public class MIDletLoader extends URLClassLoader
 		}
 		catch (Exception e)
 		{
-			System.out.println(resource + " Not Found");
-			return super.getResourceAsStream(resource);
+			// Resource not found — return empty stream instead of null
+			return new ByteArrayInputStream(new byte[0]);
 		}
 	}
 
@@ -261,15 +261,15 @@ public class MIDletLoader extends URLClassLoader
 		{
 			resource = resource.substring(1);
 		}
-		try
-		{
-			URL url = findResource(resource);
+		URL url = findResource(resource);
+		if (url != null) {
 			return url;
 		}
-		catch (Exception e)
-		{
-			System.out.println(resource + " Not Found");
-			return super.getResource(resource);
+		// Resource not found — return a dummy URL to avoid NPE in callers
+		try {
+			return new URL("jar:file:/dev/null!//" + resource);
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
@@ -303,13 +303,20 @@ public class MIDletLoader extends URLClassLoader
 		}
 		catch (Exception e)
 		{
-			return super.getResourceAsStream(resource);
+			// Resource not found — return empty stream instead of null
+			// to prevent NPE crashes in game code (e.g. ByteArrayInputStream(null))
+			return new ByteArrayInputStream(new byte[0]);
 		}
 	}
 
 	public byte[] getMIDletResourceAsByteArray(String resource)
 	{
 		URL url = getResource(resource);
+
+		// If URL is null or dummy, return empty array
+		if (url == null) {
+			return new byte[0];
+		}
 
 		try
 		{
