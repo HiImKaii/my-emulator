@@ -89,13 +89,18 @@ public class PlatformImage extends javax.microedition.lcdui.Image
 			try
 			{
 				temp = ImageIO.read(stream);
-				width = (int)temp.getWidth();
-				height = (int)temp.getHeight();
+				if (temp == null) {
+					System.out.println("Couldn't Load Image Stream (ImageIO.read returned null for " + name + ")");
+					isNull = true;
+				} else {
+					width = (int)temp.getWidth();
+					height = (int)temp.getHeight();
 
-				canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-				createGraphics();
+					canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+					createGraphics();
 
-				gc.drawImage2(temp, 0, 0);
+					gc.drawImage2(temp, 0, 0);
+				}
 			}
 			catch (Exception e)
 			{

@@ -223,7 +223,6 @@ public class MIDletLoader extends URLClassLoader
 
 	public InputStream getResourceAsStream(String resource)
 	{
-		URL url;
 		//System.out.println("Loading Resource: " + resource);
 
 		if(resource.startsWith("/"))
@@ -233,7 +232,14 @@ public class MIDletLoader extends URLClassLoader
 
 		try
 		{
-			url = findResource(resource);
+			URL url = findResource(resource);
+			if (url == null)
+			{
+				// Resource not found — return empty stream instead of null
+				// to prevent NPE in callers (e.g. ByteArrayInputStream(null))
+				return new ByteArrayInputStream(new byte[0]);
+			}
+
 			// Read all bytes, return ByteArrayInputStream //
 			InputStream stream = url.openStream();
 
@@ -363,8 +369,8 @@ public class MIDletLoader extends URLClassLoader
 		// For javax.microedition.*: delegate to parent (parent-first).
 		// Loading these child-first into MIDletLoader causes type mismatches:
 		// the preloaded javax.microedition.lcdui.Image is a different Class object
-		// than the Image that PlatformImage implements → VerifyError at runtime.
-		// With parent-first, they all come from AppClassLoader → same types throughout.
+		// than the Image that PlatformImage implements -> VerifyError at runtime.
+		// With parent-first, they all come from AppClassLoader -> same types throughout.
 		if (name.startsWith("javax.microedition.")) {
 			return super.loadClass(name, resolve);
 		}
@@ -375,17 +381,23 @@ public class MIDletLoader extends URLClassLoader
 		InputStream stream = getResourceAsStream(resource);
 		if (stream != null) {
 			try {
-				// Instrument: replace Class.getResourceAsStream → Mobile.getResourceAsStream
+				// Instrument: replace Class.getResourceAsStream -> Mobile.getResourceAsStream
 				byte[] code = instrument(stream);
+				if (code == null || code.length == 0) {
+					throw new RuntimeException("Instrumented bytecode is empty for: " + name);
+				}
 				c = defineClass(name, code, 0, code.length);
 				if (resolve) resolveClass(c);
+				// System.out.println("[LOAD] Instrumented from game JAR: " + name);
 				return c;
 			} catch (Exception e) {
+				System.out.println("[LOAD] Failed to instrument '" + name + "': " + e.getClass().getName() + " — falling back to parent");
 				// Fall through to parent on error
 			}
 		}
 
 		// Last resort: delegate to parent
+		System.out.println("[LOAD] Not found in game JAR, delegating to parent: " + name);
 		return super.loadClass(name, resolve);
 	}
 
@@ -447,9 +459,9 @@ public class MIDletLoader extends URLClassLoader
 	}
 
 
-/* ************************************************************** 
+/* **************************************************************
  * Instrumentation
- * ************************************************************** */
+ * ************************************************************* */
 
 	private byte[] instrument(InputStream stream) throws Exception
 	{

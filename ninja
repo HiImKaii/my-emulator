@@ -1,5 +1,5 @@
 #!/bin/bash
-# Chạy game kpah.jar trực tiếp, không qua launcher
+# Chạy game Ninja 217V4 (obfuscated J2ME game - rất lag trên desktop JVM)
 
 cd /home/quan/workspace/my-emulator/freej2me/build
 exec java \
@@ -7,4 +7,4 @@ exec java \
     --add-opens "java.base/java.lang.reflect=ALL-UNNAMED" \
     --add-opens "java.base/java.util=ALL-UNNAMED" \
     --add-opens "java.base/java.io=ALL-UNNAMED" \
-    -jar freej2me.jar 'file:///home/quan/Downloads/game/chedo.jar' 960 720 3
+    -jar freej2me.jar 'file:///home/quan/Downloads/game/217V4.jar' 240 320 2
